@@ -10,10 +10,14 @@ const fibonacciSeries = (num) => {
 
 const displayFibonacciSeries = () => {
   const fibonacciElement = document.getElementById("fibonacci");
-  const num = 10; // Change this value to display a different number of Fibonacci numbers
+  const num = parseInt(document.getElementById("inputNumber").value);
+
+  if (isNaN(num) || num < 1) {
+    fibonacciElement.textContent = "Please enter a valid number.";
+    return;
+  }
 
   const series = fibonacciSeries(num);
-  fibonacciElement.textContent = series.join(", ");
+  const seriesHtml = series.map(number => `<span class="fib-number">${number}</span>`).join("");
+  fibonacciElement.innerHTML = seriesHtml;
 };
-
-displayFibonacciSeries();
